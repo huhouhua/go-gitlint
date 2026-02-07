@@ -27,9 +27,10 @@ import (
 )
 
 // @todo #9 Global variables are a code smell (especially those in filterse.go).
-//  They promote coupling across different components inside the same package.
-//  Figure out a way to remove these global variables. Whatever command line
-//  parser we choose should be able to auto-generate usage.
+//
+//	They promote coupling across different components inside the same package.
+//	Figure out a way to remove these global variables. Whatever command line
+//	parser we choose should be able to auto-generate usage.
 var (
 	path             = kingpin.Flag("path", `Path to the git repo (default: ".").`).Default(".").String()                                                                                         //nolint:lll,gochecknoglobals // https://github.com/llorllale/go-gitlint/issues/23
 	subjectRegex     = kingpin.Flag("subject-regex", `Commit subject line must conform to this regular expression (default: ".*").`).Default(".*").String()                                       //nolint:lll,gochecknoglobals // https://github.com/llorllale/go-gitlint/issues/23
@@ -55,6 +56,7 @@ func main() {
 						issues.OfSubjectRegex(*subjectRegex),
 						issues.OfSubjectMaxLength(*subjectMaxLength),
 						issues.OfSubjectMinLength(*subjectMinLength),
+						issues.OfBlankLine(),
 						issues.OfBodyRegex(*bodyRegex),
 						issues.OfBodyMaxLength(*bodyMaxLength),
 					},
