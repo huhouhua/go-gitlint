@@ -1,4 +1,4 @@
-module github.com/llorllale/go-gitlint
+module github.com/huhouhua/go-gitlint
 
 require (
 	github.com/fatih/color v1.7.0

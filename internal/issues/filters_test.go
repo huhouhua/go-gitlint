@@ -20,8 +20,8 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/llorllale/go-gitlint/internal/commits"
-	"github.com/llorllale/go-gitlint/internal/issues"
+	"github.com/huhouhua/go-gitlint/internal/commits"
+	"github.com/huhouhua/go-gitlint/internal/issues"
 )
 
 func TestOfSubjectRegexMatch(t *testing.T) {
@@ -44,6 +44,24 @@ func TestOfSubjectRegexNonMatch(t *testing.T) {
 		),
 		"filter.OfSubjectRegex() must not match if the commit's subject does not match the regex",
 	)
+}
+
+func TestOfBlankLineWithRealCommits(t *testing.T) {
+	t.Run("conventional commit format", func(t *testing.T) {
+		commit := &commits.Commit{
+			Message: "feat(auth): add login validation\n\nAdd email and password validation for user login",
+		}
+		issue := issues.OfBlankLine()(commit)
+		assert.Zero(t, issue)
+	})
+
+	t.Run("commit without proper format", func(t *testing.T) {
+		commit := &commits.Commit{
+			Message: "feat(auth): add login validation\nAdd email and password validation",
+		}
+		issue := issues.OfBlankLine()(commit)
+		assert.NotZero(t, issue)
+	})
 }
 
 func TestOfBodyRegexMatch(t *testing.T) {

@@ -29,11 +29,11 @@
 
 build:
 	@echo "Building..."
-	@go build -o gitlint cmd/main.go
+	@go build -o gitlint cmd/go-gitlint/main.go
 
 test:
 	@echo "Running unit tests..."
-	@go test -count=1 -race -cover -coverprofile=coverage.txt -covermode=atomic ./... | tee cov_check.txt
+	@go test -count=1 -race -cover -coverprofile=coverage.txt -covermode=atomic ./... | grep -v "cmd/go-gitlint" | tee cov_check.txt
 
 coverage:
 	@echo "Verifying test coverage..."

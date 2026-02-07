@@ -20,8 +20,8 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/llorllale/go-gitlint/internal/commits"
-	"github.com/llorllale/go-gitlint/internal/issues"
+	"github.com/huhouhua/go-gitlint/internal/commits"
+	"github.com/huhouhua/go-gitlint/internal/issues"
 )
 
 func TestCollected(t *testing.T) {
